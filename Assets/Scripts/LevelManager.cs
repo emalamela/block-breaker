@@ -4,12 +4,12 @@ using System.Collections;
 
 public class LevelManager : MonoBehaviour {
 
-	private const string LEVEL_SCENE_FORMAT_NAME = "Level_{0:D2}";
-	private const string LOSE_SCENE_NAME = "Lose";
+	private const string LEVEL_SCENE_FORMAT_NAME = "level_{0:D2}";
+	private const string LOSE_SCENE_NAME = "lose";
 
-	private const string GAME_SCENE_NAME = "Game";
-	private const string WIN_SCENE_NAME = "Win";
-	private const string START_SCENE_NAME = "Start";
+	private const string GAME_SCENE_NAME = "game";
+	private const string WIN_SCENE_NAME = "win";
+	private const string START_SCENE_NAME = "start";
 
 	public void loadGameScene() {
 		loadScene(GAME_SCENE_NAME);
