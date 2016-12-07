@@ -4,11 +4,16 @@ using System.Collections;
 public class PaddleBehaviour : MonoBehaviour {
 
 	private const int GAME_WIDTH_IN_UNITS = 16;
+	private const string BALL_TAG = "Ball";
 
-	public GameObject ball;
 	public Vector2 ballLaunchVelocity;
 
+	private GameObject ball;
 	private bool hasLaunchedBall = false;
+
+	void Start() {
+		ball = GameObject.FindGameObjectWithTag(BALL_TAG);
+	}
 
 	void Update() {
 		updatePaddlePosition();

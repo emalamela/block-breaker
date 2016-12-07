@@ -20,7 +20,8 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void loadLoseScene() {
-		loadScene(LOSE_SCENE_NAME);
+		// TODO: Make a lose scene
+		loadScene(WIN_SCENE_NAME);
 	}
 
 	public void loadStartScene() {
