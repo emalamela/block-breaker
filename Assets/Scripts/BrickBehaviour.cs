@@ -3,17 +3,27 @@ using System.Collections;
 
 public class BrickBehaviour : MonoBehaviour {
 
-	public int hitThreshold;
+	public Sprite[] hitSprites;
 
-	[SerializeField]
 	private int hitTimes;
+	private int hitThreshold;
 
 	void Start() {
-		hitTimes = 0;	
+		hitTimes = 0;
+		hitThreshold = hitSprites.Length + 1;	
 	}
 
-	void OnCollisionEnter2D(Collision2D collision) {
-		hitTimes++;
+	void OnCollisionExit2D(Collision2D collision) {
+		if(++hitTimes >= hitThreshold) {
+			Destroy(gameObject);
+			return;
+		}
+
+		loadCurrentSprite();
 	}
 
+	private void loadCurrentSprite() {
+		int spriteIndex = hitTimes - 1;
+		GetComponent<SpriteRenderer>().sprite = hitSprites[spriteIndex];
+	}
 }
