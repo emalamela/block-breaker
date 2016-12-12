@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BrickBehaviour : MonoBehaviour {
+public class Brick : MonoBehaviour {
 
 	public static int breakableCount;
 
+	public AudioClip hitClip;
 	public Sprite[] hitSprites;
 
 	private bool isBreakable;
@@ -12,7 +13,7 @@ public class BrickBehaviour : MonoBehaviour {
 	private int hitThreshold;
 	private LevelManager levelManager;
 
-	static BrickBehaviour() {
+	static Brick() {
 		breakableCount = 0;
 	}
 
@@ -30,6 +31,10 @@ public class BrickBehaviour : MonoBehaviour {
 	}
 
 	void OnCollisionExit2D(Collision2D collision) {
+		if (hitClip != null) {
+			AudioSource.PlayClipAtPoint(hitClip, transform.position);
+		}
+
 		if (isBreakable) {
 			handleHit();
 		}

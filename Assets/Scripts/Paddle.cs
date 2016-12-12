@@ -1,31 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PaddleBehaviour : MonoBehaviour {
+public class Paddle : MonoBehaviour {
 
 	private const int GAME_WIDTH_IN_UNITS = 16;
 	private const string BALL_TAG = "Ball";
 
-	public Vector2 ballLaunchVelocity;
-
-	private GameObject ball;
-	private bool hasLaunchedBall = false;
-
-	void Start() {
-		ball = GameObject.FindGameObjectWithTag(BALL_TAG);
-	}
-
 	void Update() {
 		updatePaddlePosition();
-
-		if (!hasLaunchedBall) {
-			ball.transform.position = new Vector3(transform.position.x, ball.transform.position.y, transform.position.z);
-
-			if (Input.GetMouseButtonDown(0)) {
-				hasLaunchedBall = true;
-				ball.GetComponent<Rigidbody2D>().velocity = ballLaunchVelocity;
-			}
-		}
 	}
 
 	// Clamps the X position of the paddle to avoid it leaving the screen (this assumes paddle has 1 world unit of width)
