@@ -11,10 +11,6 @@ public class LevelManager : MonoBehaviour {
 	private const string WIN_SCENE_NAME = "win";
 	private const string START_SCENE_NAME = "start";
 
-	void Start() {
-		BrickBehaviour.breakableCount = 0;
-	}
-
 	public void loadGameScene() {
 		loadScene(GAME_SCENE_NAME);
 	}
@@ -48,14 +44,28 @@ public class LevelManager : MonoBehaviour {
 
 	public void loadLevel(int level) {
 		loadScene(string.Format(LEVEL_SCENE_FORMAT_NAME, level));
+		Brick.breakableCount = 0;
 	}
 
 	public void loadNextLevel() {
-  		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+		int lastLevelSceneIndex = SceneManager.sceneCountInBuildSettings - 2;
+
+		if (sceneIndex >= lastLevelSceneIndex) {
+			loadWinScene();
+			return;
+		}
+
+		int firstLevelSceneIndex = 1;
+		if (sceneIndex < firstLevelSceneIndex) {
+			sceneIndex = firstLevelSceneIndex;
+		} 
+
+  		loadLevel(SceneManager.GetActiveScene().buildIndex + 1);
   	}
  	
  	public void brickDestroyed() {
- 		if (BrickBehaviour.breakableCount <= 0) {
+ 		if (Brick.breakableCount <= 0) {
  			loadNextLevel();
 		}
 	}
