@@ -10,8 +10,14 @@ public class Paddle : MonoBehaviour {
 
 	private Ball ball;
 
+	private float lowerXBound;
+	private float upperXBound;
+
 	void Start() {
 		ball = GameObject.FindObjectOfType<Ball>();
+		Renderer renderer = GetComponent<Renderer>();
+		lowerXBound = renderer.bounds.extents.x;
+		upperXBound = GAME_WIDTH_IN_UNITS - lowerXBound;
 	}
 
 	void Update() {
@@ -38,7 +44,7 @@ public class Paddle : MonoBehaviour {
 	private void clampUpdatePosition(float x) {
 		transform.position = 
 				new Vector3(
-						Mathf.Clamp(x, 0.5f, 15.5f), 
+						Mathf.Clamp(x, lowerXBound, upperXBound), 
 						transform.position.y, 
 						0f);
 	}
